@@ -16,6 +16,8 @@ import java.net.*;
 public class Hilo implements Runnable{
     private Thread t;
     private Socket cl;
+     private PrintWriter pw;
+     
     public Hilo(Socket cl) {
         t= new Thread(this, String.valueOf(this.hashCode()));
         this.cl=cl;
@@ -34,6 +36,7 @@ public class Hilo implements Runnable{
          try {
             PrintWriter pw=new PrintWriter(new  OutputStreamWriter(cl.getOutputStream()));
             BufferedReader br= new BufferedReader(new InputStreamReader(cl.getInputStream()));
+            String respuesta;
             for(;;){
                       String msj=br.readLine();
                        if (msj.compareToIgnoreCase("salir")==0) { //si el cliente pone la palabra salir (ya sea con mayusc o minusc)
@@ -45,8 +48,11 @@ public class Hilo implements Runnable{
                        }
                        else{
                            //System.out.println(msj);
-                           if(!msj.equals(""))
-                                BaseDatos.Ejemplo(msj);
+                           if(!msj.equals("")){
+                               respuesta=BaseDatos.Ejemplo(msj); //hago las operaciones en la base de datos
+                               Envia(respuesta); //envio el resultado al cliente
+                           }
+                                
                        }
                        
                  }
@@ -57,5 +63,19 @@ public class Hilo implements Runnable{
         }
         
     }
+    
+    public void Envia(String dato){
+        try {
+            this.pw= new PrintWriter(new OutputStreamWriter(cl.getOutputStream()));
+            pw.println(dato);
+            pw.flush();
+        } catch (Exception e) {
+            System.out.println("No envie desde hilo");
+        }
+         
+    
+    }
+    
+    
     
 }

@@ -56,6 +56,19 @@ public class SocketCliente {
         }
     }
     
+    public String Recibe(){
+        String msj="no pude";
+        try {
+             msj=br1.readLine();
+            
+        } catch (IOException ex) {
+            Logger.getLogger(SocketCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return msj;
+    }
+    
+    
+    
     public void Desconectar(){
         try {
             this.pw.close();

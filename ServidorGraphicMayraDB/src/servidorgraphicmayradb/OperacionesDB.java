@@ -21,8 +21,9 @@ public class OperacionesDB {
     }
     
     
-    protected static void Ejemplo(String msj){
-        System.out.println("Soy el objeto OperacionesDB:"+instance.hashCode()+ "recibi:"+msj);
+    protected static String Ejemplo(String msj){
+        System.out.println("Soy el objeto OperacionesDB:"+instance.hashCode()+ " recibi:"+msj);
+        return "listo mensaje="+msj;
         
     }
     
