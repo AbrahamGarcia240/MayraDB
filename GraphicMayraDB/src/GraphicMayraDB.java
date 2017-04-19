@@ -1,5 +1,9 @@
 
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -12,12 +16,37 @@ import javax.swing.JLabel;
  * @author Abraham
  */
 public class GraphicMayraDB extends javax.swing.JFrame {
-
+     SocketCliente postman= SocketCliente.getInstance();
     /**
      * Creates new form GraphicMayraDB
      */
     public GraphicMayraDB() {
         initComponents();
+        String direccion=JOptionPane.showInputDialog(null, "Ingresa la direccion del servidor");
+        //Declaro una variable para guardar la direccion y el puerto
+        InetAddress host=null;
+        int pto=5000;
+        for(;;){
+            try {
+                host=InetAddress.getByName(direccion);
+            } 
+             catch(UnknownHostException e){
+                System.out.println("No he encontrado este host");
+                continue;
+
+            }
+            catch (IOException e) {
+                System.out.println("No pude leer el dato");
+            System.out.println("CONEXION EXITOSA");
+            }
+            break;
+        }
+        
+        //inicializo el socket del cliente para poder enviar datos
+        
+        postman.Init(host, pto);
+        
+        
         
         jLabel2.setText("<html><p>Ubicacion</p><p>MAYRA NO EXISTE</p></html>");
         
@@ -237,6 +266,8 @@ public class GraphicMayraDB extends javax.swing.JFrame {
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         // TODO add your handling code here:
+        postman.Envia("salir");
+        postman.Desconectar();
         System.exit(0);
     }//GEN-LAST:event_jButton10ActionPerformed
 

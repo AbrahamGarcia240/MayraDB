@@ -13,6 +13,8 @@ public class CrearVentana extends javax.swing.JFrame {
     /**
      * Creates new form CrearVentana
      */
+    //me conecto con el socket
+     SocketCliente postman= SocketCliente.getInstance();  
     public CrearVentana() {
         initComponents();
         
@@ -205,6 +207,11 @@ public class CrearVentana extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+        
+        //si quieren crear una base de datos
+        if (!jTextField2.getText().equals("")){
+            postman.Envia("Create database "+jTextField2.getText());
+        }
         
     }//GEN-LAST:event_jButton5ActionPerformed
 
