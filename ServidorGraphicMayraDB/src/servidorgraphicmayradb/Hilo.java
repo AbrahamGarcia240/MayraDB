@@ -45,7 +45,8 @@ public class Hilo implements Runnable{
                        }
                        else{
                            //System.out.println(msj);
-                           BaseDatos.Ejemplo(msj);
+                           if(!msj.equals(""))
+                                BaseDatos.Ejemplo(msj);
                        }
                        
                  }
