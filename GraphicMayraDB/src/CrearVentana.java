@@ -212,6 +212,8 @@ public class CrearVentana extends javax.swing.JFrame {
         if (!jTextField2.getText().equals("")){
             postman.Envia("Create database "+jTextField2.getText());
             System.out.println(postman.Recibe());
+            postman.Envia("Show databases;");
+            System.out.println(postman.Recibe());
         }
         
     }//GEN-LAST:event_jButton5ActionPerformed

@@ -49,7 +49,7 @@ public class Hilo implements Runnable{
                        else{
                            //System.out.println(msj);
                            if(!msj.equals("")){
-                               respuesta=BaseDatos.Ejemplo(msj); //hago las operaciones en la base de datos
+                               respuesta=BaseDatos.Palabra(msj); //hago las operaciones en la base de datos
                                Envia(respuesta); //envio el resultado al cliente
                            }
                                 
